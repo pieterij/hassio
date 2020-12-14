@@ -1,0 +1,11 @@
+---
+#
+# Defines ekoplaza
+#
+# https://www.home-assistant.io/integrations/zone/
+#
+name: Ekoplaza
+latitude: 52.054085
+longitude: 4.500738
+radius: 100
+passive: false

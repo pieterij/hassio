@@ -1,0 +1,11 @@
+---
+# The http component serves all files and data required for the
+# Home Assistant frontend.
+#
+# https://www.home-assistant.io/integrations/http/
+http:
+  server_port: !secret http_server_port
+  ssl_certificate: !secret http_ssl_certificate
+  ssl_key: !secret http_ssl_key
+  ip_ban_enabled: false
+  login_attempts_threshold: 5

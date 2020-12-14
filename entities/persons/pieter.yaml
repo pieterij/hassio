@@ -1,0 +1,6 @@
+---
+name: Pieter
+id: pieter
+user_id: !secret user_id_pieter
+device_trackers:
+  - device_tracker.iphone_van_pieter

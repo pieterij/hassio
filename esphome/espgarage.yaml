@@ -1,0 +1,166 @@
+esphome:
+  name: espgarage
+  platform: ESP32
+  board: esp-wrover-kit
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pw
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Espgarage Fallback Hotspot"
+    password: "Kl21FWeMPckz"
+
+# Enable logging.
+logger:
+
+# Enable Home Assistant API.
+api:
+
+# Enable over-the-air updates.
+ota:
+
+# Enable Web server.
+web_server:
+  port: 80
+
+# Sync time with Home Assistant.
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+text_sensor:
+  # Expose ESPHome version as sensor.
+  - platform: version
+    name: garagedeur ESPHome Version
+  # Expose WiFi information as sensors.
+  - platform: wifi_info
+    ip_address:
+      name: ESPgaragedeur IP
+    ssid:
+      name: ESPgaragedeur SSID
+# Global to store the on/off state of the slot
+globals:
+  - id: espslot
+    type: bool
+    restore_value: true
+    initial_value: 'true'
+    
+binary_sensor:
+  - platform: gpio
+    name: "doorsensor down"
+    pin:
+      number: 13
+      inverted: True
+      mode: INPUT_PULLUP
+  - platform: gpio
+    name: "doorsensor up"
+    pin:
+      number: 12
+      inverted: True
+      mode: INPUT_PULLUP
+  - platform: gpio
+    pin: 14
+    name: "PIR garage 1"
+    device_class: motion
+    on_press:
+    - switch.turn_on: esplamp
+    - delay: 10s
+    - switch.turn_off: esplamp
+  - platform: gpio
+    pin: 27
+    name: "PIR garage 2"
+    device_class: motion
+    on_press:
+    - switch.turn_on: esplamp
+    - delay: 10s
+    - switch.turn_off: esplamp
+  
+  
+  - platform: gpio
+    id: espbutton
+    name: espgaragedeur schakelaar
+    pin:
+      # Connected to GPIO16 on the ESP-32
+      number: 16
+      mode: INPUT_PULLUP
+      inverted: true
+    filters:
+      # Small filter, to debounce the button press.
+      - delayed_on: 25ms
+      - delayed_off: 25ms
+    on_press:
+      # Only turn on the motor when it is active.
+      - switch.turn_on: esprelay
+      - delay: 0.2s
+      - switch.turn_off: esprelay
+    on_release:
+      - switch.turn_on: esprelay
+      - delay: 0.2s
+      - switch.turn_off: esprelay
+
+
+switch:
+
+  # Switch to turn on/off the relay.
+  - platform: gpio
+    id: esprelay
+    inverted: true
+    name: ESP garagedeur motor
+    pin: GPIO2
+  - platform: gpio
+    id: esplamp
+    inverted: false
+    name: ESP garage verlichting
+    pin: GPIO4
+
+    
+  - platform: template
+    name: espGarageslot
+    id: espgarageslot
+    restore_state: true
+    turn_on_action:
+      - globals.set:
+          id: espslot
+          value: 'true'
+    turn_off_action:
+      - globals.set:
+          id: espslot
+          value: 'false'
+    lambda: |-
+      return id(espslot);
+
+  # Switch to turn on/off motor when
+  # garagedeur button is pushed.
+
+  - platform: template
+    name: espvirtuele knop
+    lambda: |-
+      if (id(button).state) {
+        return true;
+      } else {
+        return false;
+      }
+    turn_on_action:
+      then:
+        if:
+          condition:
+            - switch.is_off: espgarageslot
+          then:
+            - switch.turn_on: esprelay
+            - delay: 0.2s
+            - switch.turn_off: esprelay
+
+    turn_off_action:
+      # Only turn on the garagedoor when lock is not active.
+      then:
+        if:
+          condition:
+            - switch.is_off: espgarageslot
+          then:
+            - switch.turn_on: esprelay
+            - delay: 0.2s
+            - switch.turn_off: esprelay
+
+      

@@ -1,0 +1,3 @@
+name: telebel
+platform: telegram
+chat_id: !secret telegram_chatid2

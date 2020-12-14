@@ -1,0 +1,15 @@
+alias: Deurbel meldingen
+trigger:
+  platform: state
+  entity_id: switch.deurbel_bel
+  to: 'on'
+action:
+- service: notify.telebel
+  data:
+    title: Deurbel
+    message: Ding dong! Iemand aan de deur
+    data:
+      photo:
+      - url: https://pijlst.duckdns.org:8123{{ states.camera.deurcamera_camera.attributes.entity_picture
+          }}
+        caption: Deze persoon heeft gebeld

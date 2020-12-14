@@ -1,0 +1,11 @@
+---
+#
+# 
+#
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+#
+
+switch.virtuele_knop:
+  icon: 'mdi:garage'
+  friendly_name: Garage
+  device_class: switch

@@ -1,0 +1,10 @@
+---
+# This is an input boolean to use with automations
+# in case we have guests over for visit or sleepovers.
+#
+# https://www.home-assistant.io/integrations/input_boolean/
+#
+klus_mode:
+  name: Enables klus mode so light in garage won't turn off automatically
+  initial: false
+  icon: mdi:circular-saw

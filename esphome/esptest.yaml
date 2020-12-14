@@ -1,0 +1,36 @@
+esphome:
+  name: esptest
+  platform: ESP32
+  board: esp-wrover-kit
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pw
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esptest Fallback Hotspot"
+    password: "Kl21FWeMPckz"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+binary_sensor:
+  - platform: gpio
+    name: "testsensor"
+    pin:
+      number: 15
+      inverted: True
+      mode: INPUT_PULLUP
+
+  - platform: gpio
+    pin: 2
+    name: "PIR Sensor"
+    device_class: motion

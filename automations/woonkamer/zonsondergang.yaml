@@ -1,0 +1,17 @@
+alias: living_room_turn_on_light_at_sunelevation
+trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    value_template: "{{ state_attr('sun.sun', 'elevation') }}"
+    below: 6
+action: 
+- service: switch.turn_on
+  data:
+    entity_id:
+    - switch.vloerlamp
+- service: light.turn_on
+  data:
+    entity_id:
+    - light.eettafel_light
+    - light.wled32
+    - light.hal_light

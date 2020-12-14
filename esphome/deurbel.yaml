@@ -1,0 +1,119 @@
+esphome:
+  name: deurbel
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pw
+
+
+# Enable logging.
+logger:
+
+# Enable Home Assistant API.
+api:
+
+# Enable over-the-air updates.
+ota:
+
+# Enable Web server.
+web_server:
+  port: 80
+
+# Sync time with Home Assistant.
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+# Text sensors with general information.
+text_sensor:
+  # Expose ESPHome version as sensor.
+  - platform: version
+    name: Deurbel ESPHome Version
+  # Expose WiFi information as sensors.
+  - platform: wifi_info
+    ip_address:
+      name: Deurbel IP
+    ssid:
+      name: Deurbel SSID
+    bssid:
+      name: Deurbel BSSID
+
+# Sensors with general information.
+sensor:
+  # Uptime sensor.
+  - platform: uptime
+    name: Deurbel Uptime
+    update_interval: 3600s    
+
+  # WiFi Signal sensor.
+  - platform: wifi_signal
+    name: Deurbel WiFi Signal
+    update_interval: 3600s
+
+# Global to store the on/off state of the bel
+globals:
+  - id: bel
+    type: bool
+    restore_value: true
+    initial_value: 'true'
+
+# Exposed switches.
+switch:
+  # Switch to restart the Deurbel.
+  - platform: restart
+    name: Deurbel Restart
+
+  # Switch to turn on/off the bel.
+  - platform: gpio
+    id: relay
+    inverted: true
+    name: Deurbel bel
+    pin: GPIO0
+
+  # Switch to turn on/off bel when
+  # Deurbel button is pushed.
+  #
+  # It creates a "virtual" switch based
+  # on a global variable.
+  - platform: template
+    name: Deurbel Bel Actief
+    id: bel_actief
+    restore_state: false
+    turn_on_action:
+      - globals.set:
+          id: bel
+          value: 'true'
+    turn_off_action:
+      - globals.set:
+          id: bel
+          value: 'false'
+    lambda: |-
+      return id(bel);
+
+# Binary sensor representing the
+# Deurbel button push.
+binary_sensor:
+  - platform: gpio
+    id: button
+    name: Deurbel knop
+    pin:
+      # Connected to GPIO on the ESP-01S.
+      number: GPIO2
+      mode: INPUT_PULLUP
+      inverted: true
+    filters:
+      # Small filter, to debounce the button press.
+      - delayed_on: 75ms
+      - delayed_off: 75ms
+    on_press:
+      # Only turn on the bel when it is active.
+      then:
+        if:
+          condition:
+            - switch.is_on: bel_actief
+          then:
+            - switch.turn_on: relay
+    on_release:
+      # On release, turn of the bel.
+      - switch.turn_off: relay

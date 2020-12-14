@@ -1,0 +1,10 @@
+pieter_home:
+  zone: home
+  devices:
+    - device_tracker.iphone7_van_pieter
+  unit_of_measurement: km
+pieter_nibc:
+  zone: !secret werk_pieter_name
+  devices:
+    - device_tracker.iphone7_van_pieter
+  unit_of_measurement: km

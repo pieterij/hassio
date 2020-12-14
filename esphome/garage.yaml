@@ -1,0 +1,145 @@
+esphome:
+  name: garage
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pw
+
+
+# Enable logging.
+logger:
+
+# Enable Home Assistant API.
+api:
+
+# Enable over-the-air updates.
+ota:
+
+# Enable Web server.
+web_server:
+  port: 80
+
+# Sync time with Home Assistant.
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+# Text sensors with general information.
+text_sensor:
+  # Expose ESPHome version as sensor.
+  - platform: version
+    name: garagedeur ESPHome Version
+  # Expose WiFi information as sensors.
+  - platform: wifi_info
+    ip_address:
+      name: garagedeur IP
+    ssid:
+      name: garagedeur SSID
+    bssid:
+      name: garagedeur BSSID
+
+# Sensors with general information.
+sensor:
+  # Uptime sensor.
+  - platform: uptime
+    name: garagedeur Uptime
+    update_interval: 3600s
+
+  # WiFi Signal sensor.
+  - platform: wifi_signal
+    name: garagedeur WiFi Signal
+    update_interval: 3600s
+
+# Global to store the on/off state of the slot
+globals:
+  - id: slot
+    type: bool
+    restore_value: true
+    initial_value: 'true'
+
+# Exposed switches.
+switch:
+  # Switch to restart the garagedeur.
+  #- platform: restart
+  #  name: garagedeur Restart
+
+  # Switch to turn on/off the relay.
+  - platform: gpio
+    id: relay
+    inverted: true
+    name: garagedeur motor
+    pin: GPIO0
+    
+  - platform: template
+    name: Garageslot
+    id: garageslot
+    restore_state: true
+    turn_on_action:
+      - globals.set:
+          id: slot
+          value: 'true'
+    turn_off_action:
+      - globals.set:
+          id: slot
+          value: 'false'
+    lambda: |-
+      return id(slot);
+
+  # Switch to turn on/off motor when
+  # garagedeur button is pushed.
+
+  - platform: template
+    name: virtuele knop
+    lambda: |-
+      if (id(button).state) {
+        return true;
+      } else {
+        return false;
+      }
+    turn_on_action:
+      then:
+        if:
+          condition:
+            - switch.is_off: garageslot
+          then:
+            - switch.turn_on: relay
+            - delay: 0.2s
+            - switch.turn_off: relay
+
+    turn_off_action:
+      # Only turn on the garagedoor when lock is not active.
+      then:
+        if:
+          condition:
+            - switch.is_off: garageslot
+          then:
+            - switch.turn_on: relay
+            - delay: 0.2s
+            - switch.turn_off: relay
+
+# Binary sensor representing the
+# garagedeur button push.
+binary_sensor:
+  - platform: gpio
+    id: button
+    name: garagedeur schakelaar
+    pin:
+      # Connected to GPIO on the ESP-01S.
+      number: GPIO2
+      mode: INPUT_PULLUP
+      inverted: true
+    filters:
+      # Small filter, to debounce the button press.
+      - delayed_on: 25ms
+      - delayed_off: 25ms
+    on_press:
+      # Only turn on the motor when it is active.
+      - switch.turn_on: relay
+      - delay: 0.2s
+      - switch.turn_off: relay
+    on_release:
+      - switch.turn_on: relay
+      - delay: 0.2s
+      - switch.turn_off: relay

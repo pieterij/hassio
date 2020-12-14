@@ -1,0 +1,12 @@
+alias: Woonkamer lamp master uit
+id: 600eae21-7775-45cb-bfe7-9780ce2c76fb
+trigger:
+- device_id: e04cb9d11eda4d62a6ff43cf327f5d85
+  domain: light
+  entity_id: light.woonkamer_rechts
+  platform: device
+  type: turned_off
+condition: []
+action:
+- service: homeassistant.turn_off
+  entity_id: group.woonkamer

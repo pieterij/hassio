@@ -1,0 +1,16 @@
+---
+# This is the workday sensor. This binary sensor tells me if it is
+# a workday today. It takes into account holidays as well!
+#
+# This is pretty useful for a lot of automations.
+#
+# https://www.home-assistant.io/integrations/binary_sensor.workday/
+#
+platform: mqtt
+name: "Garagedeur Sensor"
+state_topic: "stat/deursensor/POWER1"
+availability_topic: "tele/deursensor/LWT"
+payload_available: "Off"
+payload_not_available: "On"
+device_class: door   # also: window, garage_door or opening
+qos: 1

@@ -1,0 +1,13 @@
+alias: Hal aan bij beweging
+trigger:
+  platform: state
+  entity_id: binary_sensor.pirhal_occupancy
+  to: 'on'
+action:
+  - service: timer.start
+    data:
+      entity_id: timer.timerhal
+  - service: light.turn_on
+    entity_id: light.hal_light
+  - service: light.turn_on
+    entity_id: light.wled32

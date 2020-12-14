@@ -1,0 +1,27 @@
+id: 05c5d6b9-e0f0-4f59-9749-e26afbea18ad
+alias: Afval komt vandaag!
+description: ''
+trigger:
+- at: '11:30:00'
+  platform: time
+condition:
+- condition: not
+  conditions:
+  - condition: state
+    entity_id: sensor.vandaag
+    state: None
+- condition: or
+  conditions:
+  - condition: state
+    entity_id: sensor.vandaag
+    state: restafval
+  - condition: state
+    entity_id: sensor.vandaag
+    state: papier
+  - condition: state
+    entity_id: sensor.vandaag
+    state: gft
+action:
+- data:
+    message: Vandaag wordt het {{ states('sensor.vandaag') }} opgehaald!
+  service: notify.telebel

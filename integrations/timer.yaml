@@ -1,0 +1,10 @@
+timer:
+  espresso:
+    name: Espresso
+    duration: '00:45:00'
+  zigbee_permit_join:
+    name: Time remaining
+    duration: 600
+  timerhal:
+    name: Hal timer
+    duration: '00:05:00'

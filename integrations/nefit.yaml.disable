@@ -1,0 +1,16 @@
+nefiteasy: 
+  devices:
+  - serial: '560958592'
+    accesskey: !secret nefit_acceskey
+    password: !secret nefit_password
+    sensors:
+     - status
+     - supply_temperature
+     - hot_water_operation
+     - system_pressure
+    switches:
+     - hot_water
+     - holiday_mode
+     - preheating 
+     - tomorrow_as_sunday
+     - today_as_sunday

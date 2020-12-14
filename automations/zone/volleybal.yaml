@@ -1,0 +1,18 @@
+alias: enter_volleybal
+trigger:
+  - platform: zone
+    entity_id: device_tracker.iphone7_van_pieter, device_tracker.iphone_van_saskia
+    
+    zone: zone.volleybal
+    event: "enter" #or leave
+condition:
+  - condition: time
+    after: '19:00:00'
+    before: '22:00:00'
+action:
+  - service: notify.all_devices
+    data:
+      title: "Pieter aan het Volleyballen"
+      message: "Pieter is bij volleybal aangekomen om @ {{ states('sensor.date_time') }}"
+      data:
+        sticky: 'false'

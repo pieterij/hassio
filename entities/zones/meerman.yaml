@@ -1,0 +1,12 @@
+---
+#
+# Defines the Meerman Zone
+#
+# https://www.home-assistant.io/integrations/zone/
+#
+
+name: Meerman
+latitude: 52.0658496
+longitude: 4.481989469
+radius: 100
+icon: mdi:home  

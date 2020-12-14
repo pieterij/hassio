@@ -1,0 +1,14 @@
+alias: Timerstop Espresso
+trigger:
+- platform: event
+  event_type: timer.finished
+  event_data:
+    entity_id: timer.espresso
+action:
+  - service: switch.turn_off
+    data:
+      entity_id:
+      - switch.espresso_relay
+  - service: timer.cancel
+    data:
+      entity_id: timer.espresso

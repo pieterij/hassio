@@ -1,0 +1,11 @@
+---
+#
+# 
+#
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+#
+
+switch.garageslot:
+  icon: 'mdi:key'
+  friendly_name: Slot
+  device_class: switch

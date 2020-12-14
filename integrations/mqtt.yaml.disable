@@ -1,0 +1,13 @@
+#
+#
+# https://www.home-assistant.io/integrations/mqtt/
+#
+mqtt:
+  discovery: true
+  broker: 192.168.1.101
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'

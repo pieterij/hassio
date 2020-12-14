@@ -1,0 +1,4 @@
+name: saskia
+platform: group
+services:
+  - service: notify_mobile_app_iphone_van_saskia

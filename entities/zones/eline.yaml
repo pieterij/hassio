@@ -1,0 +1,12 @@
+---
+#
+# Defines Eline en Luc
+#
+# https://www.home-assistant.io/integrations/zone/
+#
+
+name: Eline en Luc
+latitude: 52.068287
+longitude: 4.513177
+radius: 100
+icon: mdi:home 

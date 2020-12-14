@@ -1,0 +1,6 @@
+platform: template
+sensors: 
+  onderweg_naar_huis:
+    friendly_name: "Onderweg naar huis"
+    entity_id: proximity.pieter_home
+    value_template: "{{ state_attr('proximity.pieter_home', 'dir_of_travel')}}"

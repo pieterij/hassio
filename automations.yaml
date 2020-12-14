@@ -1,0 +1,32 @@
+- id: '1605804404508'
+  alias: Garderobe aan als gang aan gaat
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: 95bba3aa075efc37bc6801098133c514
+    entity_id: light.hal_light
+    domain: light
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 401ff3f7b7f6cd2d36620a40d46ec772
+    entity_id: light.wled32
+    domain: light
+  mode: single
+- id: '1605805136918'
+  alias: Garderobe ui als gang uit
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: 95bba3aa075efc37bc6801098133c514
+    entity_id: light.hal_light
+    domain: light
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 401ff3f7b7f6cd2d36620a40d46ec772
+    entity_id: light.wled32
+    domain: light
+  mode: single

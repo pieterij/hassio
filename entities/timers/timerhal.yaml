@@ -1,0 +1,3 @@
+timerhal:
+  name: Hal timer
+  duration: '00:15:00'

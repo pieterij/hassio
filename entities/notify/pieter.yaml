@@ -1,0 +1,4 @@
+name: pieter
+platform: group
+services:
+  - service: notify_mobile_app_iphone7_van_pieter

@@ -1,0 +1,8 @@
+alias: Garagelicht aan bij beweging
+trigger:
+  platform: state
+  entity_id: binary_sensor.pirgarage_occupancy
+  to: 'on'
+action:
+  service: switch.turn_on
+  entity_id: switch.garagelicht_relay

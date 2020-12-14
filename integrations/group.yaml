@@ -1,0 +1,19 @@
+group:
+  spots:
+    name: Spots
+    entities: 
+      - light.spot1
+      - light.spot2
+      - light.spot3
+      - light.spot4
+      - light.spot5
+      - light.spot6
+  woonkamer:
+    name: Woonkamer
+    entities: 
+      - group.spots
+      - light.plafond
+      - switch.vloerlamp
+      - light.eettafel_light
+      - light.kleur_1_light
+

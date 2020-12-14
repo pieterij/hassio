@@ -1,0 +1,10 @@
+platform: rflink
+devices:
+  fa500_000052e4_01:
+    name: espresso
+  fa500_000052e4_03:
+    name: garageknop  
+  eurodomest_0f1379_00:
+    name: Staande lamp 
+  eurodomest_0f1379_01:
+    name: Garderobe

@@ -1,0 +1,10 @@
+alias: Unlock the door
+id: 87d0eeb9-7072-49b0-ab13-47b8bd9466b6
+trigger:
+  platform: state
+  entity_id: binary_sensor.people_home
+  from: 'off'
+  to: 'on'
+action:
+  service: switch.turn_off
+  entity_id: switch.garageslot

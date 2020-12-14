@@ -1,0 +1,10 @@
+---
+#
+# 
+#
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+#
+
+light.woonkamer_rechts:
+  friendly_name: WK rechts
+  device_class: light

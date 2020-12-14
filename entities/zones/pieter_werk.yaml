@@ -1,0 +1,11 @@
+---
+#
+# Defines Pieter's Work Location 
+#
+# https://www.home-assistant.io/integrations/zone/
+#
+name: !secret werk_pieter_name
+latitude: !secret werk_pieter_latitude
+longitude: !secret werk_pieter_longitude
+radius: 250
+passive: false

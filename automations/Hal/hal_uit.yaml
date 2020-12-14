@@ -1,0 +1,10 @@
+alias: Hal uit timer reset
+trigger:
+  platform: state
+  entity_id: light.hal_light
+  from: 'on'
+  to: 'off'
+action:
+  - service: timer.cancel
+    data:
+      entity_id: timer.timerhal

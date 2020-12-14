@@ -1,0 +1,10 @@
+alias: Garagelicht uit na 5 minten
+trigger:
+  platform: state
+  entity_id: binary_sensor.pirgarage_occupancy
+  to: 'off'
+  for:
+    minutes: 5
+action:
+  service: switch.turn_off
+  entity_id: switch.garagelicht_relay

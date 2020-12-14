@@ -1,0 +1,18 @@
+alias: Schemering
+trigger:
+  platform: numeric_state
+  entity_id: sun.sun
+  attribute: elevation
+  # Can be a positive or negative number
+  below: -4.0
+action:
+- service: switch.turn_on
+  data:
+    entity_id:
+    - switch.vloerlamp
+- service: light.turn_on
+  data:
+    entity_id:
+    - light.eettafel_light
+    - light.wled32
+    - light.hal_light

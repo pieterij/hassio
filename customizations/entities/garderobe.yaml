@@ -1,0 +1,11 @@
+---
+#
+# 
+#
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+#
+
+switch.garderobe:
+  frienly_name: Garderobe
+  device_class: light
+  icon: 'mdi:lightbulb'

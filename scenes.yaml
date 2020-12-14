@@ -1,0 +1,14 @@
+- id: '1607330097572'
+  name: New Scene
+  entities:
+    group.spots:
+      entity_id:
+      - light.spot1
+      - light.spot2
+      - light.spot3
+      - light.spot4
+      - light.spot5
+      - light.spot6
+      order: 0
+      friendly_name: Spots
+      state: 'off'

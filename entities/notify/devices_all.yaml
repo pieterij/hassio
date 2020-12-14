@@ -1,0 +1,6 @@
+name: all_devices
+platform: group
+services:
+  - service: notify_mobile_app_iphone7_van_pieter
+  - service: notify_mobile_app_iphone_van_saskia
+  - service: notify_mobile_app_ipad_van_pieter

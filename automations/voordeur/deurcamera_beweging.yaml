@@ -1,0 +1,20 @@
+alias: Er beweegt iets
+trigger:
+- platform: state
+  entity_id: binary_sensor.deurcamera_pir
+  from: 'off'
+  to: 'on'
+condition:
+  condition: time
+  after: 05:00:00
+  before: '23:00:00'
+action:
+- service: notify.telebot
+  data:
+    title: Deur alert
+    message: Wie is er aan de deur?
+    data:
+      photo:
+      - url: https://ijlst.duckdns.org:8123{{ states.camera.deurcamera_camera.attributes.entity_picture
+          }}
+        caption: 'Deze hebben we betrapt:'

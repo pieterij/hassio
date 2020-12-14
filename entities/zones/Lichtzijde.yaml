@@ -1,0 +1,11 @@
+---
+#
+# Defines Lichtzijde
+#
+# https://www.home-assistant.io/integrations/zone/
+#
+name: Lichtzijde
+latitude: 52.068656
+longitude: 4.493243
+radius: 100
+passive: false

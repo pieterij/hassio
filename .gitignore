@@ -1,0 +1,31 @@
+# Generic ignores
+*.log
+*.db
+*.db-shm
+*.db-wal
+*.pyc
+._*
+__pycache__
+
+# Directory (contents) ignores
+config/.cloud
+config/.storage
+config/deps
+.storage
+.cloud
+
+# Specific file ignores
+config/.config_entries.json
+config/ip_bans.yaml
+config/secrets.yaml
+
+
+# ESPHome ignores
+config/esphome/secrets.yaml
+
+
+# Specific keeps
+!.gitkeep
+hacs/
+
+secrets.yaml

@@ -1,0 +1,19 @@
+group:
+  '1':
+    # Required: Name which will be used to control the group
+    friendly_name: woonkamerspots
+    # Required: Retain messages (true/false) (default: false)
+    retain: false
+    # Optional: Default transition to be used when e.g. changing brightness (in seconds) (default: 0)
+    transition: 2
+    # Optional: Change group state when one of the devices in it changes state, see 'State changes' below (default: true)
+    optimistic: true
+    # Optional: Devices of this group,
+    # Note: this has to be the ieeeAddr of the device, not the friendly_name! (default: empty)
+    devices:
+      - '0x588e81fffe2b47f9'
+      - '0x842e14fffe4c4905'
+      - '0x842e14fffe475688'
+      - '0x842e14fffe138618'
+      - '0x588e81fffe0c817c'
+      - '0x588e81fffe117d2e'

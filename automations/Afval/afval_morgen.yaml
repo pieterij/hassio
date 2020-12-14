@@ -1,0 +1,27 @@
+id: 9ece40b0-8032-4d4d-96ba-419388e08f41
+alias: Afval komt morgen!
+description: ''
+trigger:
+- at: '19:45:00'
+  platform: time
+condition:
+- condition: not
+  conditions:
+  - condition: state
+    entity_id: sensor.morgen
+    state: None
+- condition: or
+  conditions:
+  - condition: state
+    entity_id: sensor.morgen
+    state: restafval
+  - condition: state
+    entity_id: sensor.morgen
+    state: papier
+  - condition: state
+    entity_id: sensor.morgen
+    state: gft
+action:
+- data:
+    message: Morgen wordt het {{ states('sensor.morgen') }} opgehaald!
+  service: notify.telebel

@@ -1,0 +1,9 @@
+alias: Espresso
+trigger:
+  - platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionName: 'Espresso'
+action:
+  service: switch.toggle
+  entity_id: switch.espresso_relay

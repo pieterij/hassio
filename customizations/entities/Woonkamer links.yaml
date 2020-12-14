@@ -1,0 +1,10 @@
+---
+#
+# 
+#
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+#
+
+light.woonkamer_links:
+  friendly_name: WK links
+  device_class: light

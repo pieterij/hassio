@@ -1,0 +1,13 @@
+alias: notification coffee off
+trigger:
+  platform: state
+  entity_id: switch.espresso_relay
+  from: 'on'
+  to: 'off'
+action:
+  - service: notify.telebot
+    data:
+      message: Espressomachine staat uit
+  - service: timer.cancel
+    data:
+      entity_id: timer.espresso

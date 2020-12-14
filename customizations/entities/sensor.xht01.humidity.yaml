@@ -1,0 +1,10 @@
+---
+#
+# 
+#
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+#
+sensor.mitemp_bt_humidity:
+  friendly_name: Woonkamer
+  device_class: humidity
+  icon: mdi:humidity

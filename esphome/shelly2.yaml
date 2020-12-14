@@ -1,0 +1,44 @@
+esphome:
+  name: shelly2
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pw
+  
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+# Enable Web server.
+web_server:
+  port: 80
+
+
+# Device Specific Config
+output:                                
+  - platform: gpio                     
+    pin: GPIO4                         
+    id: shelly_2_relay                         
+light:                                 
+  - platform: binary                   
+    name: "Woonkamer rechts"              
+    output: shelly_2_relay                     
+    id: lightid                        
+binary_sensor:                         
+  - platform: gpio                     
+    pin:                               
+      number: GPIO5                    
+      #mode: INPUT_PULLUP              
+      #inverted: True                  
+    name: "Switch Shelly 2"             
+    on_state:                          
+      then:                            
+        - light.toggle: lightid        
+    internal: true                     
+    id: switchid       

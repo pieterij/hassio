@@ -1,0 +1,10 @@
+---
+#
+# 
+#
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+#
+ssensor.mitemp_bt_battery:
+  friendly_name: Woonkamer 
+  device_class: battery
+  icon: mdi:battery

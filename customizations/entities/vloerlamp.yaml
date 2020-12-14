@@ -1,0 +1,11 @@
+---
+#
+# 
+#
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+#
+
+switch.vloerlamp:
+  friendly_name: Vloerlamp
+  device_class: light
+  icon: 'mdi:lightbulb'

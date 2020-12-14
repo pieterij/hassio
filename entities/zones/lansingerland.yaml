@@ -1,0 +1,11 @@
+---
+#
+# Defines train station 
+#
+# https://www.home-assistant.io/integrations/zone/
+#
+name: Lansingerland
+latitude: 52.042091
+longitude: 4.517471
+radius: 350
+icon: mdi:train

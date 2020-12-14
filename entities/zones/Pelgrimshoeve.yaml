@@ -1,0 +1,11 @@
+---
+#
+# Defines Pelgrimshoeve
+#
+# https://www.home-assistant.io/integrations/zone/
+#
+name: Pelgrimshoeve
+latitude: 52.060823
+longitude: 4.525309
+radius: 100
+passive: false

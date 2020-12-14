@@ -1,0 +1,24 @@
+tradfri_r1:
+  module: controllerx
+  class: E1810Controller
+  controller: sensor.remote1_action
+  integration: z2m
+  light: group.spots
+tradfri_onoff:
+  module: controllerx
+  class: E1743Controller
+  controller: sensor.dimmer_action
+  integration: z2m
+  light: light.hal_light 
+tradfri_onoff2:
+  module: controllerx
+  class: E1743Controller
+  controller: sensor.dimmer_2_action
+  integration: z2m
+  light: light.hal_light 
+tradfri_r3:
+  module: controllerx
+  class: E1810Controller
+  controller: sensor.remote3_action
+  integration: z2m
+  light: light.kleur_1_light 

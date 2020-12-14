@@ -1,0 +1,10 @@
+---
+#
+# 
+#
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
+#
+sensor.mitemp_bt_temperatuur:
+  friendly_name: Woonkamer 
+  device_class: temperature
+  icon: mdi:temperature
